@@ -1,0 +1,55 @@
+version: "3"
+services:
+  client:
+    build:
+      context: ./client
+      dockerfile: Dockerfile
+    ports:
+      - 3000:3000
+    container_name: gmail-client
+    networks:
+      - mern-stack
+    volumes:
+      - ./client/src:/usr/app/src
+      - ./client/public:/usr/app/public
+    depends_on:
+      - server
+    stdin_open: true
+    tty: true
+
+  server:
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    ports:
+      - 5000:5000
+    container_name: gmail-server
+    networks:
+      - mern-stack
+    volumes:
+      - ./server/src:/usr/app/src
+      - /D/batwara:/usr/app/src/data
+    depends_on:
+      - db
+
+  db:
+    image: mongo
+    ports:
+      - 27017:27017
+    container_name: mongo-db
+    networks:
+      - mern-stack
+    volumes:
+      - mongo-data:/data/db
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=admin
+      - MONGO_INITDB_ROOT_PASSWORD=iBirds123abcxyz
+      - MONGO_INITDB_DATABASE=admin
+
+networks:
+  mern-stack:
+    driver: bridge
+
+volumes:
+  mongo-data:
+    driver: local
