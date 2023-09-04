@@ -41,10 +41,10 @@ services:
       - mern-stack
     volumes:
       - mongo-data:/data/db
-    environment:
-      - MONGO_INITDB_ROOT_USERNAME=admin
-      - MONGO_INITDB_ROOT_PASSWORD=iBirds123abcxyz
-      - MONGO_INITDB_DATABASE=admin
+    # environment:
+    #   - MONGO_INITDB_ROOT_USERNAME=admin
+    #   - MONGO_INITDB_ROOT_PASSWORD=iBirds123abcxyz
+    #   - MONGO_INITDB_DATABASE=admin
 
 networks:
   mern-stack:
